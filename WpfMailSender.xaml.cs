@@ -22,6 +22,8 @@ namespace WpfTestMailSender
     /// </summary>
     public partial class WpfMailSender: Window
     {
+       
+
         public WpfMailSender()
         {
             InitializeComponent();
@@ -30,7 +32,12 @@ namespace WpfTestMailSender
             cbSenderSelect.SelectedValuePath = "Value";
             DBclass db = new DBclass();
             dgEmails.ItemsSource = db.Emails;
+            tscTabSwitcher.btnNextClick += TscTabSwitcher_btnNextClick;
         }
+        private void TscTabSwitcher_btnNextClick(object sender, RoutedEventArgs e)
+        {
+            tabControl.SelectedIndex = 1;
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -66,7 +73,8 @@ namespace WpfTestMailSender
             //}
 
             SendEndWindow sew = new SendEndWindow();
-            sew.ShowDialog();
+            sew.ShowDialog();
+
            // MessageBox.Show("Работа завершена.");
         }
 
@@ -95,7 +103,8 @@ namespace WpfTestMailSender
                 return;
             }
             EmailSendServiceClass emailSender = new EmailSendServiceClass(strLogin, strPassword);
-            emailSender.SendMails((IQueryable<Email>)dgEmails.ItemsSource);
+            emailSender.SendMails((IQueryable<Email>)dgEmails.ItemsSource);
+
         }
 
         private void BtnSend_Click(object sender, RoutedEventArgs e)
@@ -115,7 +124,10 @@ namespace WpfTestMailSender
             }
             EmailSendServiceClass emailSender = new EmailSendServiceClass(cbSenderSelect.Text,
             cbSenderSelect.SelectedValue.ToString());
-            sc.SendEmails(dtSendDateTime, emailSender, (IQueryable<Email>)dgEmails.ItemsSource);
-        }
+            sc.SendEmails(dtSendDateTime, emailSender, (IQueryable<Email>)dgEmails.ItemsSource);
+
+        }       
+       
+
     }
 }

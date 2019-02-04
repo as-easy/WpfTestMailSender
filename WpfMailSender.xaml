@@ -1,0 +1,117 @@
+﻿<Window x:Class="WpfTestMailSender.WpfMailSender"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfTestMailSender"
+        mc:Ignorable="d"
+        Icon="Images/Letter3.png" Title="Рассыльщик" Height="351" Width="618" Background="#FF6585AA" >
+
+    <DockPanel Margin="0" >
+        <Menu Height="25" VerticalAlignment="Top" VerticalContentAlignment="Center" DockPanel.Dock="Top">
+            <MenuItem Header="Файл" Height="25" Margin="0" VerticalAlignment="Top">
+                <MenuItem Header="MenuItem" HorizontalAlignment="Left" Height="25" Width="200"/>
+                <MenuItem x:Name="m12" Header="MenuItem" HorizontalAlignment="Left" Height="25" Width="200"/>
+                <MenuItem x:Name="miClose" Header="Закрыть" HorizontalAlignment="Left" Height="25" Width="200" Click="MiClose_Click"/>
+            </MenuItem>
+            <MenuItem Header="Помощь" Height="25" Margin="0" VerticalAlignment="Top"/>
+
+        </Menu>
+        <TabControl x:Name="tabControl" DockPanel.Dock="Top" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,2,0,0">
+            <TabItem Header="Формирование группы рассылок" Margin="-2,-2,-2,0">
+                <Grid Background="#FFC73333">
+                    <ToolBarTray Background="White" Height="65" VerticalAlignment="Top">
+                        <ToolBar Height="30" VerticalAlignment="Top" Margin="0">
+                            <Label x:Name="lSender" Content="Выбрать отправителя: " Height="25" VerticalAlignment="Top" Width="135"/>
+                            <ComboBox x:Name="cbSenderSelect" Height="25" Width="175" SelectedIndex="0" ToolTip="&quot;Выбрать e-mail отправителя&quot;">
+                                <!--<ComboBoxItem Content="avniknarav@gmail.com"/>
+                                <ComboBoxItem Content="varankinva@yandex.ru"/>-->
+                            </ComboBox>
+                            <Button x:Name="btnAddSender" Width="25" Height="25" ToolTip="&quot;Добавить&quot;" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Image Source="Images/addButton.png" HorizontalAlignment="Right"/>
+                            </Button>
+                            <Button x:Name="btnEditSender" Width="25" Height="25" ToolTip="&quot;Редактировать&quot;"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Image Source="Images/editButton.png" HorizontalAlignment="Right"/>
+                            </Button>
+                            <Button x:Name="btnDeleteSender" Width="25" Height="25" ToolTip="&quot;Удалить&quot;"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Image Source="Images/delButton.png" HorizontalAlignment="Right"/>
+                            </Button>
+                        </ToolBar>
+                        <ToolBar Width="205">
+                            <Label x:Name="lClock" Content="Перейти в планировщик: " Height="25" VerticalAlignment="Top"/>
+                            <Button x:Name="btnClock" Click="btnClock_Click" Width="26" Height="25" ToolTip="&quot;Перейти в планировщик&quot;"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Image Source="Images/clockButton.png" HorizontalAlignment="Right"/>
+                            </Button>
+                        </ToolBar>
+                        <ToolBar Band="1" Height="30" VerticalAlignment="Top" Margin="0">
+                            <Label x:Name="lSmtp" Content="Выбрать smtp-сервер: " Height="25" VerticalAlignment="Top" Width="135"/>
+                            <ComboBox x:Name="cbSmptSelect" Height="25" Width="175" SelectedIndex="0" ToolTip="&quot;Выбрать порт smpt&quot;">
+                                <ComboBoxItem Content="25"/>
+                                <ComboBoxItem Content="530"/>
+                            </ComboBox>
+                            <Button x:Name="btnAddSmtp" Width="25" Height="25" ToolTip="&quot;Добавить&quot;" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Image Source="Images/addButton.png" HorizontalAlignment="Right"/>
+                            </Button>
+                            <Button x:Name="btnEditSmtp" Width="25" Height="25" ToolTip="&quot;Редактировать&quot;"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Image Source="Images/editButton.png" HorizontalAlignment="Right"/>
+                            </Button>
+                            <Button x:Name="btnDeleteSmtp" Width="25" Height="25" ToolTip="&quot;Удалить&quot;"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Image Source="Images/delButton.png" HorizontalAlignment="Right"/>
+                            </Button>
+                        </ToolBar>
+                        <ToolBar Band="1" VerticalAlignment="Top" Margin="0" Width="205">
+                            <Label x:Name="lSelAdress" Content="Список адресов: " Height="25" VerticalAlignment="Top"/>
+                            <Button x:Name="btnAddAdress" Width="25" Height="25" ToolTip="&quot;Добавить&quot;" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Image Source="Images/addButton.png" HorizontalAlignment="Right"/>
+                            </Button>
+                            <Button x:Name="btnEditAdress" Width="25" Height="25" ToolTip="&quot;Редактировать&quot;"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Image Source="Images/editButton.png" HorizontalAlignment="Right"/>
+                            </Button>
+                            <Button x:Name="btnDeleteAdress" Width="25" Height="25" ToolTip="&quot;Удалить&quot;"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Image Source="Images/delButton.png" HorizontalAlignment="Right"/>
+                            </Button>
+                        </ToolBar>
+                    </ToolBarTray>
+                    <DataGrid x:Name="dgEmails" Margin="0,65,0,0"/>
+                </Grid>
+
+            </TabItem>
+
+            <TabItem x:Name="tabPlanner" Header="Планировщик">
+                <Grid Background="#FFE5E5E5">
+                    <Calendar x:Name="cldSchedulDateTimes" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" SelectionMode="MultipleRange"/>
+                    <TextBox x:Name="tbTimePicker" HorizontalAlignment="Left" Height="23" Margin="0,168,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="179" RenderTransformOrigin="-0.458,-0.261"/>
+
+                    <Button x:Name="btnSend"  Margin="0,196,397,48" Click="BtnSend_Click">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Images/clockButton.png" Width="16" Height="16"/>
+                                <TextBlock Margin="3,0,0,0" Text="Отправить запланированно" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                    <Button x:Name="btnSendAtOnce" Content="Отправить сразу" Margin="0,222,425,22" Click="BtnSendAtOnce_Click"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Редактор писем">
+                <Grid Background="#FFE5E5E5">
+                    <RichTextBox>
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text="RichTextBox"/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Статистика">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+
+
+        </TabControl>
+
+
+    </DockPanel>
+
+</Window>

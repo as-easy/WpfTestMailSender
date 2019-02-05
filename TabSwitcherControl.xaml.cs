@@ -13,21 +13,27 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfTestMailSender
+namespace TabSwitcher
 {
     /// <summary>
-    /// Логика взаимодействия для TabSwitcher.xaml
+    /// Логика взаимодействия для TabSwitcherControl.xaml
     /// </summary>
     public partial class TabSwitcherControl : UserControl
     {
-
-        #region properties
+        public event RoutedEventHandler btnNextClick;
+        public event RoutedEventHandler btnPreviosClick;
         private bool bHideBtnPrevios = false; // поле соответствующее будет ли скрыта кнопка        Предыдущий
-        private bool bHideBtnNext = false; // поле соответствующее будет ли скрыта кнопка Следующий
-                                           /// <summary>
-                                           /// Свойство соответствующее будет ли скрыта кнопка Предыдущий.
-                                           /// Чтобы Свойство отразилось на PropertiesGrid у нашего контрола, его нужно представить        именно свойством, а не полем
-                                           /// </summary>
+        private bool bHideBtnNext = false;
+        public TabSwitcherControl()
+        {
+            InitializeComponent();
+        }
+        #region properties
+        // поле соответствующее будет ли скрыта кнопка Следующий
+        /// <summary>
+        /// Свойство соответствующее будет ли скрыта кнопка Предыдущий.
+        /// Чтобы Свойство отразилось на PropertiesGrid у нашего контрола, его нужно представить        именно свойством, а не полем
+        /// </summary>
         public bool IsHideBtnPrevios
         {
             get { return bHideBtnPrevios; }
@@ -87,8 +93,7 @@ namespace WpfTestMailSender
         }
         #endregion
 
-        public event RoutedEventHandler btnNextClick;
-        public event RoutedEventHandler btnPreviosClick;
+        
 
         private void btnPrevios_Click(object sender, RoutedEventArgs e)
         {

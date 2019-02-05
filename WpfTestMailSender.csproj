@@ -82,9 +82,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TabSwitcher.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="TabSwitcherControl.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Theme.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -109,8 +109,8 @@
     <Compile Include="SendEndWindow.xaml.cs">
       <DependentUpon>SendEndWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TabSwitcher.xaml.cs">
-      <DependentUpon>TabSwitcher.xaml</DependentUpon>
+    <Compile Include="TabSwitcherControl.xaml.cs">
+      <DependentUpon>TabSwitcherControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="VariablesClass.cs" />
     <Compile Include="WpfMailSender.xaml.cs">

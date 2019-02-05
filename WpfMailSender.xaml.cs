@@ -22,7 +22,7 @@ namespace WpfTestMailSender
     /// </summary>
     public partial class WpfMailSender: Window
     {
-       
+
 
         public WpfMailSender()
         {
@@ -33,11 +33,13 @@ namespace WpfTestMailSender
             DBclass db = new DBclass();
             dgEmails.ItemsSource = db.Emails;
             tscTabSwitcher.btnNextClick += TscTabSwitcher_btnNextClick;
+           
         }
         private void TscTabSwitcher_btnNextClick(object sender, RoutedEventArgs e)
         {
-            tabControl.SelectedIndex = 1;
-        }
+            tabControl.SelectedIndex = 2;
+        }
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -126,8 +128,21 @@ namespace WpfTestMailSender
             cbSenderSelect.SelectedValue.ToString());
             sc.SendEmails(dtSendDateTime, emailSender, (IQueryable<Email>)dgEmails.ItemsSource);
 
-        }       
-       
+        }
+        //public event RoutedEventHandler btnNextClick;
+        //public event RoutedEventHandler btnPreviosClick;
 
+        //private void btnPrevios_Click(object sender, RoutedEventArgs e)
+        //{
+        //    btnPreviosClick?.Invoke(sender, e);
+
+        //}
+
+        //private void btnNext_Click(object sender, RoutedEventArgs e)
+        //{
+        //    btnNextClick?.Invoke(sender, e);
+        //}
+
+        
     }
 }

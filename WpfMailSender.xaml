@@ -1,10 +1,11 @@
-﻿<Window x:Class="WpfTestMailSender.WpfMailSender"
+﻿<Window
         xmlns:TabSwitcher="clr-namespace:TabSwitcher"  
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTestMailSender"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="WpfTestMailSender.WpfMailSender"
         mc:Ignorable="d"
         Icon="Images/Letter3.png" Title="Рассыльщик" Height="370" Width="678" Background="#FF6585AA" >
 
@@ -40,11 +41,6 @@
                         </ToolBar>
                         <ToolBar Margin="0,0,-134,0">
                             <TabSwitcher:TabSwitcherControl x:Name="tscTabSwitcher" IsHideBtnNext="False"/>
-
-                            <!--<TabSwitcher:TabSwitcherControl btnNext Click="btnNextClick" btnPreviosClick=""/>-->
-                            <!--<local:TabSwitcherControl x:Name="tscTabSwitcher" IsHideBtnPrevios="True"/>-->
-                            <!--<TabSwitcher:TabSwitcherControl x:Name="tscTabSwitcher1" IsHideBtnPrevios="True" IsHideBtnNext="True" />
-                            <TabSwitcher:TabSwitcherControl x:Name="tscTabSwitcher" IsHideBtnPrevios="True" IsHideBtnNext="True" />-->
                             <!--<Label x:Name="lClock" Content="Перейти в планировщик: " Height="25" VerticalAlignment="Top"/>
                             <Button x:Name="btnClock" Click="btnClock_Click" Width="26" Height="25" ToolTip="&quot;Перейти в планировщик&quot;"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">-->
                             <!--<Image Source="Images/clockButton.png" HorizontalAlignment="Right"/>
@@ -53,8 +49,8 @@
                         <ToolBar Band="1" Height="30" VerticalAlignment="Top" Margin="0">
                             <Label x:Name="lSmtp" Content="Выбрать smtp-сервер: " Height="25" VerticalAlignment="Top" Width="135"/>
                             <ComboBox x:Name="cbSmptSelect" Height="25" Width="175" SelectedIndex="0" ToolTip="&quot;Выбрать порт smpt&quot;">
-                                <ComboBoxItem Content="25"/>
-                                <ComboBoxItem Content="530"/>
+                                <!--<ComboBoxItem Content="25"/>
+                                <ComboBoxItem Content="530"/>-->
                             </ComboBox>
                             <Button x:Name="btnAddSmtp" Width="25" Height="25" ToolTip="&quot;Добавить&quot;" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                 <Image Source="Images/addButton.png" HorizontalAlignment="Right"/>
@@ -86,24 +82,29 @@
 
             <TabItem x:Name="tabPlanner" Header="Планировщик">
                 <Grid Background="#FFE5E5E5">
-                    <Calendar x:Name="cldSchedulDateTimes" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" SelectionMode="MultipleRange"/>
-                    <TextBox x:Name="tbTimePicker" HorizontalAlignment="Left" Height="23" Margin="0,168,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="179" RenderTransformOrigin="-0.458,-0.261"/>
-
-                    <Button x:Name="btnSend"  Margin="0,196,397,48" Click="BtnSend_Click">
+                    <Calendar x:Name="cldSchedulDateTimes" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" SelectionMode="MultipleRange" Width="185" Opacity="1.2" FontSize="15" Height="169"/>
+                    <!--<TextBox x:Name="tbTimePicker" HorizontalAlignment="Left" Height="23" Margin="0,168,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="179" RenderTransformOrigin="-0.458,-0.261"/>-->
+                    <xctk:TimePicker x:Name="tbTimePicker" HorizontalAlignment="Left" Margin="0,172,0,0" VerticalAlignment="Top" Height="31" Width="218"/>
+                    <Button x:Name="btnSend"  Margin="0,211,0,0" Click="BtnSend_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="218">
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="Images/clockButton.png" Width="16" Height="16"/>
+                            <Image Source="Images/clockButton.png" Width="24" Height="24"/>
                             <TextBlock Margin="3,0,0,0" Text="Отправить запланированно" VerticalAlignment="Center"/>
                         </StackPanel>
                     </Button>
-                    <Button x:Name="btnSendAtOnce" Content="Отправить сразу" Margin="212,196,213,48" Click="BtnSendAtOnce_Click"/>
+                    <Button x:Name="btnSendAtOnce" Margin="221,211,0,0" Click="BtnSendAtOnce_Click" HorizontalAlignment="Left" Width="210" VerticalAlignment="Top" Height="40">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="Images/sendButton1.png" Width="24" Height="24"/>
+                            <TextBlock Margin="3,0,0,0" Text="Отправить сразу" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
                 </Grid>
             </TabItem>
             <TabItem Header="Редактор писем">
                 <Grid Background="#FFE5E5E5">
-                    <RichTextBox>
+                    <RichTextBox x:Name="emailBody">
                         <FlowDocument>
                             <Paragraph>
-                                <Run Text="RichTextBox"/>
+                                <Run x:Name="emailBody2"/>
                             </Paragraph>
                         </FlowDocument>
                     </RichTextBox>

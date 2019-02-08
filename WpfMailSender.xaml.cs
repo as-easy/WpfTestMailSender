@@ -30,6 +30,10 @@ namespace WpfTestMailSender
             cbSenderSelect.ItemsSource = VariablesClass.Senders;
             cbSenderSelect.DisplayMemberPath = "Key";
             cbSenderSelect.SelectedValuePath = "Value";
+            cbSmptSelect.ItemsSource = VariablesClass.Smtps;
+            cbSmptSelect.DisplayMemberPath = "Key";
+            cbSmptSelect.SelectedValuePath = "Value";
+
             DBclass db = new DBclass();
             dgEmails.ItemsSource = db.Emails;
             tscTabSwitcher.btnNextClick += TscTabSwitcher_btnNextClick;
@@ -94,6 +98,16 @@ namespace WpfTestMailSender
         {
             string strLogin = cbSenderSelect.Text;
             string strPassword = cbSenderSelect.SelectedValue.ToString();
+            string strSmtp = cbSmptSelect.Text;
+            int iSmtpPort = Convert.ToInt32(cbSmptSelect.SelectedValue);
+
+            if(string.IsNullOrEmpty(emailBody2.Text))
+            {
+                MessageBox.Show("Письмо не заполнено");
+                tabControl.SelectedIndex = 2;
+                return;
+            }
+
             if (string.IsNullOrEmpty(strLogin))
             {
                 MessageBox.Show("Выберите отправителя");
@@ -104,8 +118,15 @@ namespace WpfTestMailSender
                 MessageBox.Show("Укажите пароль отправителя");
                 return;
             }
-            EmailSendServiceClass emailSender = new EmailSendServiceClass(strLogin, strPassword);
+            if (string.IsNullOrEmpty(strSmtp))
+            {
+                MessageBox.Show("Выберите smtp порт");
+                return;
+            }
+            EmailSendServiceClass emailSender = new EmailSendServiceClass(strLogin, strPassword, strSmtp, iSmtpPort);
             emailSender.SendMails((IQueryable<Email>)dgEmails.ItemsSource);
+
+
 
         }
 
@@ -124,8 +145,12 @@ namespace WpfTestMailSender
                 MessageBox.Show("Дата и время отправки писем не могут быть раньше, чем настоящее время");
             return;
             }
-            EmailSendServiceClass emailSender = new EmailSendServiceClass(cbSenderSelect.Text,
-            cbSenderSelect.SelectedValue.ToString());
+
+            string strLogin = cbSenderSelect.Text;
+            string strPassword = cbSenderSelect.SelectedValue.ToString();
+            string strSmtp = cbSmptSelect.Text;
+            int iSmtpPort = Convert.ToInt32(cbSmptSelect.SelectedValue);
+            EmailSendServiceClass emailSender = new EmailSendServiceClass(strLogin, strPassword, strSmtp, iSmtpPort);
             sc.SendEmails(dtSendDateTime, emailSender, (IQueryable<Email>)dgEmails.ItemsSource);
 
         }

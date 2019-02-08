@@ -14,15 +14,18 @@ namespace WpfTestMailSender
         #region vars
         private string strLogin;
         private string strPassword;
-        private string strSmtp = "smtp.yandex.ru";
-        private int iSmtpPort = 25;
+        private string strSmtp;// = "smtp.yandex.ru";
+        private int iSmtpPort;// = 25;
         private string strBody;
         private string strSubject;
         #endregion 
-        public EmailSendServiceClass(string sLogin, string sPassword)
+        public EmailSendServiceClass(string sLogin, string sPassword, string strSmtp, int iSmtpPort)
         {
             strLogin = sLogin;
             strPassword = sPassword;
+            this.strSmtp = strSmtp;
+            this.iSmtpPort = iSmtpPort;
+
         }
 
         private void SendMail(string mail, string name)
@@ -50,6 +53,7 @@ namespace WpfTestMailSender
 
         public void SendMails(IQueryable<Email> emails)
         {
+            
             foreach (Email email in emails)
             {
                 SendMail(email.Value, email.Name);
